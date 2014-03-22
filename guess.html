@@ -1,0 +1,41 @@
+
+<h1>Hello. I am thinking of a nmuber between 0 and 99 inclusive. Take a guess</h1>
+
+
+<input type="text" id="guess" />
+
+<div id="info" style="color:green; border:4px dashed green"></div>
+
+
+
+
+
+
+<script>
+  
+  var howmanyguesses = 0
+  
+  var num = Math.floor( Math.random () * 100 )
+
+  function showMsg(msg) { document.getElementById('info').innerText = (msg + ', guesses='+howmanyguesses) }
+  
+  
+  document.getElementById("guess").onkeydown = function(evt) {
+    
+    if (evt.keyCode === 13) {
+      howmanyguesses = howmanyguesses+1
+      //console.log("PRESSED ENTER BITCH!")
+      var val = document.getElementById("guess").value
+      if (val == num) {
+        showMsg("GOT IT!")
+      } else if (val > num) {
+        showMsg('no, my number is smaller')
+      } else if (val < num) {
+        showMsg('no, my number ys bigger')
+      }
+      
+    }
+                  //console.log(evt)
+  }
+  
+</script>
