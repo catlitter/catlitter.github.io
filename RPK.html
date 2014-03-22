@@ -1,0 +1,93 @@
+<html>
+<title> Rock Paper Kitty </title>
+<body>
+  <h1> Rock Paper Kitty! </h1>
+ 
+  <button onclick="window.rock()">Rock</button>
+  <button onclick="window.paper()">Paper</button>
+  <button onclick="window.kitty()">Kitty</button>
+  <div id="info"></div>
+  <div id="scores"></div>
+  <img id="kitty" src="kitten.jpg" width="150px" height="150px"/>
+  <img id="paper" src="paper.jpg" width="150px" height="150px"/>
+  <img id="rock" src="rock.jpg" width="150px" height="150px"/>
+  <script>
+
+    var myWins = 0
+    var cWins = 0
+    
+    var winTable = [
+        [0, 1, -1],
+        [-1, 0, 1],
+        [1, -1, 0]
+      ];
+    var map = {
+      'rock':0,
+      'paper':1,
+      'kitty':2
+    }
+    
+
+    
+    function showThing(s) {
+      document.getElementById("info").innerText=s
+    }
+    
+    function chooseHand() {
+      var randomValue = Math.random()
+      if (randomValue < 1/3) {
+        return 'rock'
+      } else if (randomValue < 2/3) {
+        return 'paper'
+      } else {
+        return 'kitty'
+      }
+    }
+    
+    function play(myHand) {
+      hideit()
+      var computerHand = chooseHand()
+      // 
+      
+      var cindex = map[computerHand]
+      var myindex = map[myHand]
+      var result = winTable[cindex][myindex]
+      if (result == 0) {
+        showThing("tie")
+      } else if (result > 0) {
+        myWins++
+        showThing("you win!")
+      } else {
+        cWins++
+        showThing("you LOSER")
+      }
+      showScore()
+      
+      document.getElementById(computerHand).style.display='inline'
+    }
+    
+    function showScore() {
+      document.getElementById("scores").innerText = "Scores: You: " + myWins + ", computer: " + cWins
+    }
+    
+    var rock = function(whatcolor){
+        play("rock")  
+    }   
+    var paper = function(){
+        play("paper")
+    }
+    var kitty = function(){
+        play("kitty")
+        }
+    
+    function hideit() {
+     document.getElementById("kitty").style.display="none"
+     document.getElementById("paper").style.display="none"
+     document.getElementById("rock").style.display="none"
+    }
+    
+   
+    
+    
+  </script>
+  
